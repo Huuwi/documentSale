@@ -1,0 +1,72 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.bannerContainer {
+    display: flex;
+    min-height: 400px;
+    /* justify-content: center; */
+    background-image: url("../../../assets/saleTet.png");
+    background-size: contain;
+    height: 100%;
+    margin: 10px 0px 10px 0px;
+}
+
+.moreIcon {
+    font-size: 40px;
+    margin-left: 50px;
+    margin-right: 5px;
+}
+
+.banner {
+    height: 500px;
+    width: 500px;
+    margin-left: 30px;
+    margin-right: 30px;
+    transition: .5s;
+}
+
+.moreIconContainer {
+    display: flex;
+    cursor: pointer;
+    transition: .5s;
+    border: solid 1px black;
+    height: 100%;
+    padding-right: 50px;
+}
+
+.moreIconContainer:hover {
+    scale: 1.01;
+    background-color: rgb(228, 249, 193);
+}
+
+.spanType {
+    margin-top: 5px;
+    font-size: 25px;
+}
+
+.typeContainer {
+    height: 100%;
+    display: flex;
+    margin-left: 100px;
+    margin-right: 20px;
+    flex-direction: column;
+    background-color: bisque;
+}
+
+.type {
+    transition: .5s;
+    cursor: pointer;
+    background-color: rgb(161, 219, 200);
+}
+
+.type:hover {
+    scale: 1.1;
+    background-color: greenyellow;
+}
+
+.saleBanner {
+    height: 400px;
+    width: 100px;
+}

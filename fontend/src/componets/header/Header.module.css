@@ -1,0 +1,76 @@
+.headerWrapper {
+    width: 100%;
+}
+
+.headerWrapper {
+    display: flex;
+    height: 50px;
+    text-align: center;
+}
+
+.spanBookHaving {
+    padding: 10px;
+    transition: .5s ease;
+}
+
+.spanBookHaving:hover {
+    background-color: rgb(163, 241, 241);
+    scale: 1.1;
+    cursor: pointer;
+}
+
+.spanYourLib {
+    padding: 10px;
+    transition: .5s ease;
+}
+
+.spanYourLib:hover {
+    background-color: rgb(163, 241, 241);
+    scale: 1.1;
+    cursor: pointer;
+}
+
+.spanPayMent {
+    padding: 10px;
+    transition: .5s ease;
+}
+
+.spanPayMent:hover {
+    background-color: rgb(163, 241, 241);
+    scale: 1.1;
+    cursor: pointer;
+}
+
+.spanProfile {
+    padding: 10px;
+    transition: .5s ease;
+}
+
+.spanProfile:hover {
+    background-color: rgb(163, 241, 241);
+    scale: 1.1;
+    cursor: pointer;
+}
+
+.childElement {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: rgb(224, 236, 247);
+    border-left: 1px solid red;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s ease;
+}
+
+.childElement:hover {
+    background-color: rgb(163, 241, 241);
+    scale: 1.1;
+    cursor: pointer;
+}
+
+.iconUser {
+    font-size: 30px;
+}

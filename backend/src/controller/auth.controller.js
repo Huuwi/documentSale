@@ -18,13 +18,13 @@ class AuthController {
                 })
             }
 
-            let valid = commonHelper.verifyCaptcha(key, text)
+            // let valid = commonHelper.verifyCaptcha(key, text)
 
-            if (!valid?.state) {
-                return res.status(400).json({
-                    message: valid.message,
-                })
-            }
+            // if (!valid?.state) {
+            //     return res.status(400).json({
+            //         message: valid.message,
+            //     })
+            // }
 
 
             let charactersNotValid = ["`", '"', "`"]

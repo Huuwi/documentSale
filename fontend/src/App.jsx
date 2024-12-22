@@ -8,6 +8,7 @@ import RechargeCard from './pages/payMent/rechargeCard/RechargeCard.jsx'
 import PaymentSuccess from './pages/payMent/paymentSuccess/PaymentSuccess.jsx'
 import AdminDashBoard from './pages/admin/adminDashBoard/AdminDashBoard.jsx'
 import UserDashBoard from './pages/user/userDashBoard/userDashBoard.jsx'
+import DescriptionBook from './pages/user/descriptionBook/DescriptionBook.jsx'
 
 function App() {
 
@@ -63,6 +64,7 @@ function App() {
         <Route path='/payMent' element={<RechargeCard />} />
         <Route path='/paymentSuccess' element={<PaymentSuccess />} />
         <Route path='/admin/DashBoard' element={<AdminDashBoard />} />
+        <Route path='/desBook' element={<DescriptionBook />} />
       </Routes>
     </>
   )

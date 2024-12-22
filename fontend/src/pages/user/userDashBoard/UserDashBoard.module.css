@@ -1,12 +1,19 @@
 .wrapper {
     display: flex;
     flex-direction: column;
+    background-color: rgb(187, 184, 181);
+}
+
+.content {
+    max-width: 90%;
+    justify-self: center;
+    align-self: center;
+    background-color: white;
 }
 
 .bannerContainer {
     display: flex;
     min-height: 400px;
-    /* justify-content: center; */
     background-image: url("../../../assets/saleTet.png");
     background-size: contain;
     height: 100%;

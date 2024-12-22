@@ -45,20 +45,30 @@ const main = async () => {
     //         price double
     //         );`)
 
+
+
+    // await connection.executeQuery(`CREATE TABLE payment (
+    //     paymentId int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    //     userId int,
+    //     amount double,
+    //     transId varchar(100)
+    // );`);
+
+
     //-----------------------------------------------------------------------------------------------------------------------------------
 
-    // await connection.executeQuery(`insert into user (userName,passWord,nickName,isAdmin,balance) values (?,?,?,?,?)`, ["admin", "admin", "admin", true, 999999999])
+    // await connection.executeQuery(`insert into user (userName,passWord,nickName,isAdmin,balance) values (?,?,?,?,?)`, ["admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "admin", true, 999999999])
 
-    await connection.executeQuery(`insert into user (userName,passWord,nickName,isAdmin,balance) values (?,?,?,?,?)`, ["user1", "user1", "user1", false, 2000])
+    // await connection.executeQuery(`insert into user (userName,passWord,nickName,isAdmin,balance) values (?,?,?,?,?)`, ["user1", "user1", "user1", false, 2000])
 
-    // await connection.executeQuery('delete from document')
+    // await connection.executeQuery('delete from user where userId = 7')
     //     .then((data) => {
     //         console.log(data);
     //     })
 
 
 
-    await connection.executeQuery('select * from document')
+    await connection.executeQuery('select * from user')
         .then((data) => {
             console.log(data);
         })

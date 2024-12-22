@@ -1,0 +1,57 @@
+.wrapperFooter {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 10px;
+    background-color: white;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 20px;
+    border-right: 1px solid black;
+}
+
+.logo {
+    background-image: url("../../assets//logo.png");
+    height: 100px;
+    width: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.services {
+    min-width: 400px;
+    min-height: 200px;
+}
+
+.icon {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+
+.listIcon {
+    display: flex;
+    justify-content: space-between;
+    min-width: 200px;
+}
+
+
+.rowImg {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+
+.logoImage {
+    height: 150px;
+    width: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

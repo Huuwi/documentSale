@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Header() {
     let navigate = useNavigate()
 
-    let [categorySelected, setCategorySelected] = useState(0)
+    let categorySelected = localStorage.getItem("categorySelected") || 0
 
     let [hoverAccountInfor, setHoverAccountInfor] = useState(false)
 
@@ -19,23 +19,23 @@ function Header() {
     }
 
     function clickFirstCate() {
-        setCategorySelected(0)
+        localStorage.setItem("categorySelected", 0)
         navigate("/dashBoard")
     }
 
     function clickSecondCate() {
-        setCategorySelected(1)
+        localStorage.setItem("categorySelected", 1)
         navigate("/dashBoard")
     }
 
 
     function clickThirdCate() {
-        setCategorySelected(2)
-        navigate("/dashBoard")
+        localStorage.setItem("categorySelected", 2)
+        navigate("/payment")
     }
 
     function clickFourCate() {
-        setCategorySelected(3)
+        localStorage.setItem("categorySelected", 3)
         navigate("/dashBoard")
     }
 

@@ -4,9 +4,10 @@ import { FaSearch } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa";
 import { FaCartArrowDown } from "react-icons/fa";
 import { use, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 function HeaderNew() {
+    let navigate = useNavigate()
 
     let dataDocument = localStorage.getItem("dataDocument")
     dataDocument = JSON.parse(dataDocument)
@@ -38,7 +39,8 @@ function HeaderNew() {
     }
 
     function handleClickItem(e) {
-        localStorage.setItem("itemSelected", JSON.stringify(e))
+        localStorage.setItem("descriptionBook", JSON.stringify(e))
+        navigate("/desBook")
     }
 
     let htmlSpans = <div style={{ display: "flex", flexDirection: "column" }} className={styles.searchResults} >

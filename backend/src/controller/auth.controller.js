@@ -18,13 +18,13 @@ class AuthController {
                 })
             }
 
-            // let valid = commonHelper.verifyCaptcha(key, text)
+            let valid = commonHelper.verifyCaptcha(key, text)
 
-            // if (!valid?.state) {
-            //     return res.status(400).json({
-            //         message: valid.message,
-            //     })
-            // }
+            if (!valid?.state) {
+                return res.status(400).json({
+                    message: valid.message,
+                })
+            }
 
 
             let charactersNotValid = ["`", '"', "`"]
@@ -51,12 +51,17 @@ class AuthController {
                 })
             }
 
+            console.log("passWord : ", passWord);
+            console.log("hash : ", userFound?.passWord);
 
-            if (commonHelper.compareHash(passWord, userFound?.password)) {
+
+
+            if (!commonHelper.compareHash(passWord, userFound?.passWord)) {
                 return res.status(400).json({
                     message: "password is not correct!"
                 })
             }
+
 
             let userId = userFound.userId
 
@@ -144,6 +149,8 @@ class AuthController {
             }
 
             let hashPassWord = commonHelper.hashText(passWord)
+            console.log("hashPassWord :  ", hashPassWord);
+
 
             await globalThis.connection.executeQuery(`INSERT INTO user (userName , passWord , nickName)
                                                         VALUES (? , ? , ?);` , [userName, hashPassWord, nickName])

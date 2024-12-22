@@ -6,6 +6,7 @@ import axios from "axios"
 import Book from "../../../componets/disPlayBooks/Book/Book";
 import { use } from "react";
 import DisPlayBooks from "../../../componets/disPlayBooks/disPlayBooks";
+import Footer from "../../../componets/footer/Footer";
 
 
 function UserDashBoard() {
@@ -86,10 +87,6 @@ function UserDashBoard() {
 
 
 
-
-
-
-
     useEffect(() => {
 
         const fetchData = async () => {
@@ -108,19 +105,23 @@ function UserDashBoard() {
     return (
         <div className={styles.wrapper}>
             <HeaderNew />
-            <div className={styles.bannerContainer}>
-                <div className={styles.typeContainer} >
-                    <div className={styles.moreIconContainer} onMouseEnter={handleHoverType} onMouseLeave={handleOutHoverType}>
-                        <CgDetailsMore className={styles.moreIcon} />
-                        <span className={styles.spanType}>Danh Mục Sách</span>
+            <div className={styles.content}>
+                <div className={styles.bannerContainer}>
+                    <div className={styles.typeContainer} >
+                        <div className={styles.moreIconContainer} onMouseEnter={handleHoverType} onMouseLeave={handleOutHoverType}>
+                            <CgDetailsMore className={styles.moreIcon} />
+                            <span className={styles.spanType}>Danh Mục Sách</span>
+                        </div>
+                        {!displayType ? <></> : typeComponets}
                     </div>
-                    {!displayType ? <></> : typeComponets}
-                </div>
-                <div className={styles.banner} style={{ backgroundImage: `url(${bannerPaths[bannerUse % bannerPaths.length]})`, backgroundRepeat: "no-repeat", backgroundSize: "contain" }} />
-                <div className={styles.banner} style={{ backgroundImage: `url(${bannerPaths[(bannerUse + Math.floor(Math.random() * 3)) % bannerPaths.length]})`, backgroundRepeat: "no-repeat", backgroundSize: "contain" }} />
+                    <div className={styles.banner} style={{ backgroundImage: `url(${bannerPaths[bannerUse % bannerPaths.length]})`, backgroundRepeat: "no-repeat", backgroundSize: "contain" }} />
+                    <div className={styles.banner} style={{ backgroundImage: `url(${bannerPaths[(bannerUse + Math.floor(Math.random() * 3)) % bannerPaths.length]})`, backgroundRepeat: "no-repeat", backgroundSize: "contain" }} />
 
+                </div>
+                <DisPlayBooks dataDisPlay={dataDisPlay} />
             </div>
-            <DisPlayBooks dataDisPlay={dataDisPlay} />
+            <Footer />
+
         </div>
 
     )

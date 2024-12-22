@@ -1,0 +1,41 @@
+.desWrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(187, 184, 181);
+}
+
+.bookOrder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 30%;
+    background-color: orange;
+}
+
+.bookInf {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 70%;
+    min-height: 350px;
+    background-color: greenyellow;
+    margin-left: 20px;
+}
+
+.image {
+    margin: 20px;
+    height: 350px;
+    width: 250px;
+}
+
+.content {
+    display: flex;
+    width: 90%;
+    justify-self: center;
+    align-self: center;
+    background-color: rgb(187, 184, 181);
+    justify-content: center;
+    align-items: center;
+}

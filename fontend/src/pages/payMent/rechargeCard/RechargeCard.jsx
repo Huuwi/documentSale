@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './RechargeCard.module.css';
 import axios from 'axios';
+import HeaderNew from '../../../componets/HeaderNew/HeaderNew';
 
 const RechargeCard = () => {
 
@@ -43,36 +44,39 @@ const RechargeCard = () => {
     };
 
     return (
-        <div className={styles.container}>
-            <div className={styles.card}>
-                <div className={styles.header}>
-                    <h2 className={styles.nickname}>xin chào , {nickName}</h2>
-                    <p className={styles.username} style={{ color: "white", fontSize: "20px" }}>Tài khoản: {userName}</p>
-                    <p className={styles.balance} style={{ color: "#FFFF00", fontSize: "20px" }}>Số dư: {balance} xu</p>
-                </div>
-
-                <div className={styles.content}>
-                    <p style={{ color: "black", fontSize: "20px", margin: "20px", fontWeight: "bold" }} >Chọn mệnh giá thẻ nạp:</p>
-                    <div className={styles.amountOptions}>
-                        {amounts.map((amount) => (
-                            <div
-                                key={amount}
-                                className={`${styles.amount} ${selectedAmount === amount ? styles.selected : ''}`}
-                                onClick={() => handleSelect(amount)}
-                            >
-                                {amount.toLocaleString()} VND
-                            </div>
-                        ))}
+        <div className={styles.wrapper} >
+            <HeaderNew />
+            <div className={styles.container}>
+                <div className={styles.card}>
+                    <div className={styles.header}>
+                        <h2 className={styles.nickname}>xin chào , {nickName}</h2>
+                        <p className={styles.username} style={{ color: "white", fontSize: "20px" }}>Tài khoản: {userName}</p>
+                        <p className={styles.balance} style={{ color: "#FFFF00", fontSize: "20px" }}>Số dư: {balance} xu</p>
                     </div>
-                </div>
 
-                <button
-                    className={styles.confirmButton}
-                    onClick={handleSubmit}
-                    disabled={!selectedAmount}
-                >
-                    Xác nhận
-                </button>
+                    <div className={styles.content}>
+                        <p style={{ color: "black", fontSize: "20px", margin: "20px", fontWeight: "bold" }} >Chọn mệnh giá thẻ nạp:</p>
+                        <div className={styles.amountOptions}>
+                            {amounts.map((amount) => (
+                                <div
+                                    key={amount}
+                                    className={`${styles.amount} ${selectedAmount === amount ? styles.selected : ''}`}
+                                    onClick={() => handleSelect(amount)}
+                                >
+                                    {amount.toLocaleString()} VND
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <button
+                        className={styles.confirmButton}
+                        onClick={handleSubmit}
+                        disabled={!selectedAmount}
+                    >
+                        Xác nhận
+                    </button>
+                </div>
             </div>
         </div>
     );

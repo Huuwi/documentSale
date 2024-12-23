@@ -9,10 +9,14 @@ import { useNavigate } from "react-router-dom";
 function HeaderNew() {
     let navigate = useNavigate()
 
+    let userData = localStorage.getItem("userData")
+
     let dataDocument = localStorage.getItem("dataDocument")
     dataDocument = JSON.parse(dataDocument)
 
     let [dataFound, setDataFound] = useState([])
+    let [searchValue, setSearchValue] = useState("");
+
 
     function findModuleByName(bookName, dataDocument) {
         if (!bookName) {
@@ -35,12 +39,15 @@ function HeaderNew() {
     }
 
     function handleChange(e) {
+        setSearchValue(e.target.value);
         setDataFound(findModuleByName(e.target.value, dataDocument))
     }
 
     function handleClickItem(e) {
         localStorage.setItem("descriptionBook", JSON.stringify(e))
         navigate("/desBook")
+        setSearchValue("");
+        setDataFound([]);
     }
 
     let htmlSpans = <div style={{ display: "flex", flexDirection: "column" }} className={styles.searchResults} >
@@ -57,7 +64,7 @@ function HeaderNew() {
             <Header />
             <div className={styles.nav} >
                 <div className={styles.logo} />
-                <input type="text" className={styles.searchInput} placeholder="Nhập tên sản phẩm muốn tìm..." onChange={handleChange} />
+                <input type="text" className={styles.searchInput} placeholder="Nhập tên sản phẩm muốn tìm..." onChange={handleChange} value={searchValue} />
                 {htmlSpans}
                 <FaSearch className={styles.searchIcon} />
                 <FaPhone className={styles.hotlineIcon} />

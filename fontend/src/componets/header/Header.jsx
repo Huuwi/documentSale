@@ -1,12 +1,25 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./Header.module.css"
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function Header() {
     let navigate = useNavigate()
+    let userData = localStorage.getItem("userData")
+    let [nickName, setNickName] = useState("")
+
+    useEffect(() => {
+        if (!userData) {
+            navigate("/login")
+        }
+        else {
+            userData = JSON.parse(userData)
+            setNickName(userData.nickName)
+        }
+    }, [nickName])
 
     let categorySelected = localStorage.getItem("categorySelected") || 0
+
 
     let [hoverAccountInfor, setHoverAccountInfor] = useState(false)
 
@@ -59,7 +72,7 @@ function Header() {
                 <div className={styles.childElement} style={categorySelected == 3 ? styleSelected : {}} onMouseEnter={handleHover} onMouseLeave={() => { setHoverAccountInfor(false) }} onClick={clickFourCate} >
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", margin: "10px" }} >
                         <FaUserCircle className={styles.iconUser} />
-                        <span style={{ padding: "5px" }}>Xin chào : Nguyễn Hữu Đức</span>
+                        <span style={{ padding: "5px", minWidth: "200px" }}>Xin chào : {nickName}</span>
                     </div>
                 </div>
                 {

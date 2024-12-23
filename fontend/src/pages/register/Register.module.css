@@ -13,7 +13,7 @@
 .form {
     width: 100%;
     max-width: 400px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(120, 119, 119, 0.8);
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -22,8 +22,8 @@
 }
 
 .logo {
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
     margin: 0 auto 20px;
     background: url('../../assets/logo.png') no-repeat center/contain;
 }
@@ -41,7 +41,7 @@ input {
     margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #ddd;
-    background-color: #1a1a1a;
+    background-color: #98ab57;
     color: white;
 }
 

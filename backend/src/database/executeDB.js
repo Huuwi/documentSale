@@ -17,17 +17,17 @@ const main = async () => {
     // );`)
 
 
-    await connection.executeQuery(`CREATE TABLE document (
-    documentId int primary key NOT NULL AUTO_INCREMENT,
-    name text  CHARACTER SET utf8mb4,
-    author varchar(100) CHARACTER SET utf8mb4 ,
-    description text CHARACTER SET utf8mb4,
-    image varchar(255) default 'https://th.bing.com/th/id/OIP.ssgniUaZGeguCb9lES1obQHaHa?rs=1&pid=ImgDetMain',
-    price double default 0,
-    quantitySold int default 0,
-    filePath varchar(255),
-    type int default 1
-    );`)
+    // await connection.executeQuery(`CREATE TABLE document (
+    // documentId int primary key NOT NULL AUTO_INCREMENT,
+    // name text  CHARACTER SET utf8mb4,
+    // author varchar(100) CHARACTER SET utf8mb4 ,
+    // description text CHARACTER SET utf8mb4,
+    // image varchar(255) default 'https://th.bing.com/th/id/OIP.ssgniUaZGeguCb9lES1obQHaHa?rs=1&pid=ImgDetMain',
+    // price double default 0,
+    // quantitySold int default 0,
+    // filePath text  CHARACTER SET utf8mb4,
+    // type int default 1
+    // );`)
 
 
     // await connection.executeQuery(`CREATE TABLE comment (

@@ -44,8 +44,8 @@ input::placeholder {
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background: url('../../assets/logo.png') no-repeat center;
     background-size: contain;
     margin-bottom: 10px;

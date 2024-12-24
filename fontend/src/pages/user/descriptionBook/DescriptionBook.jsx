@@ -5,12 +5,13 @@ import { FaCartPlus } from "react-icons/fa";
 import { FaTruck } from "react-icons/fa";
 import { RiRefund2Fill } from "react-icons/ri";
 import { FaMoneyBillAlt } from "react-icons/fa";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaRegStar } from "react-icons/fa";
 import axios from "axios";
+import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 function DescriptionBook() {
-
+    const [showDiv, setShowDiv] = useState(false);
     let descriptionBook = localStorage.getItem("descriptionBook")
     descriptionBook = JSON.parse(descriptionBook)
 
@@ -50,11 +51,27 @@ function DescriptionBook() {
             console.log(error);
             alert(error.response.data.message);
         }
-
-
     }
 
-
+    //Thêm sách vào giỏ
+    async function addToCart() {
+        console.log("Clicked");
+        try {
+            const response = await axios.post(
+                import.meta.env.VITE_BACKEND_URL + "/auth/addCart",
+                { documentId: descriptionBook.documentId },
+                { withCredentials: true }
+            );
+            setShowDiv(true); 
+            setTimeout(() => {
+                setShowDiv(false);
+            }, 1000);
+        }
+        catch (error) {
+            console.log(error);
+            alert(error.response.data.message);
+        }
+    }
 
     return (
         <div className={styles.desWrapper}>
@@ -64,7 +81,7 @@ function DescriptionBook() {
                 <div className={styles.bookOrder}>
                     <div className={styles.image} style={{ backgroundImage: `url(${descriptionBook.image})` }} />
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px" }}>
-                        <button className={styles.btnAddCart}><FaCartPlus style={{ fontSize: "25px", margin: "5px" }} /> Thêm vào giỏ hàng</button>
+                        <button className={styles.btnAddCart} onClick={addToCart}><FaCartPlus style={{ fontSize: "25px", margin: "5px" }} /> Thêm vào giỏ hàng</button>
                         <button className={styles.btnBuy} onClick={handleClickBuyItem} >Mua trực tiếp hàng</button>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", marginTop: "20px", flexDirection: "column", gap: "10px" }}>
@@ -201,6 +218,23 @@ function DescriptionBook() {
 
             </div>
             <Footer />
+
+            <div className={styles.addToCart}
+                style={{
+                    display: showDiv ? "flex" : "none",
+                }}
+            >
+                <IoCheckmarkDoneSharp style={{
+                    fontSize: "80px", color: 'white'
+                }
+                } />
+                <p style={{
+                    position: "absolute",
+                    bottom: '-40px',
+                    fontFamily: "cursive",
+                    fontSize: "15px"
+                }}>Thêm giỏ hàng thành công!</p>
+            </div>
 
         </div >
     )

@@ -6,15 +6,15 @@ const main = async () => {
     let connection = new Connection()
     await connection.connect()
 
-    await connection.executeQuery(`CREATE TABLE user (
-    userId int primary key NOT NULL AUTO_INCREMENT,
-    userName varchar(30) not null,
-    passWord varchar(100) not null ,
-    nickName varchar(30) CHARACTER SET utf8mb4,
-    avartar varchar(255) default 'https://thumbs.dreamstime.com/z/student-avatar-illustration-user-profile-icon-youth-avatar-student-avatar-illustration-simple-cartoon-user-portrait-user-profile-276205531.jpg',
-    isAdmin boolean default 0,
-    balance double default 0 
-    );`)
+    // await connection.executeQuery(`CREATE TABLE user (
+    // userId int primary key NOT NULL AUTO_INCREMENT,
+    // userName varchar(30) not null,
+    // passWord varchar(100) not null ,
+    // nickName varchar(30) CHARACTER SET utf8mb4,
+    // avartar varchar(255) default 'https://thumbs.dreamstime.com/z/student-avatar-illustration-user-profile-icon-youth-avatar-student-avatar-illustration-simple-cartoon-user-portrait-user-profile-276205531.jpg',
+    // isAdmin boolean default 0,
+    // balance double default 0 
+    // );`)
 
 
     await connection.executeQuery(`CREATE TABLE document (
@@ -30,41 +30,41 @@ const main = async () => {
     );`)
 
 
-    await connection.executeQuery(`CREATE TABLE comment (
-        commentId int primary key NOT NULL AUTO_INCREMENT,
-        userId int,
-        content text CHARACTER SET utf8mb4,
-        vote int,
-        documentId int
-        );`)
+    // await connection.executeQuery(`CREATE TABLE comment (
+    //     commentId int primary key NOT NULL AUTO_INCREMENT,
+    //     userId int,
+    //     content text CHARACTER SET utf8mb4,
+    //     vote int,
+    //     documentId int
+    //     );`)
 
-    await connection.executeQuery(`CREATE TABLE boughtDocument (
-            boughtDocumentId int primary key NOT NULL AUTO_INCREMENT,
-            userId int,
-            documentId int
-            );`)
+    // await connection.executeQuery(`CREATE TABLE boughtDocument (
+    //         boughtDocumentId int primary key NOT NULL AUTO_INCREMENT,
+    //         userId int,
+    //         documentId int
+    //         );`)
 
-    await connection.executeQuery(`CREATE TABLE cart (
-                cartId int primary key NOT NULL AUTO_INCREMENT,
-                userId int,
-                documentId int
-                );`)
+    // await connection.executeQuery(`CREATE TABLE cart (
+    //             cartId int primary key NOT NULL AUTO_INCREMENT,
+    //             userId int,
+    //             documentId int
+    //             );`)
 
 
 
-    await connection.executeQuery(`CREATE TABLE payment (
-        paymentId int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-        userId int,
-        amount double,
-        transId varchar(100)
-    );`);
+    // await connection.executeQuery(`CREATE TABLE payment (
+    //     paymentId int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    //     userId int,
+    //     amount double,
+    //     transId varchar(100)
+    // );`);
 
 
     //-----------------------------------------------------------------------------------------------------------------------------------
 
-    await connection.executeQuery(`insert into user (userName,passWord,nickName,isAdmin,balance) values (?,?,?,?,?)`, ["admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "admin", true, 999999999])
+    // await connection.executeQuery(`insert into user (userName,passWord,nickName,isAdmin,balance) values (?,?,?,?,?)`, ["admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "admin", true, 999999999])
 
-    await connection.executeQuery(`insert into user (userName,passWord,nickName,isAdmin,balance) values (?,?,?,?,?)`, ["user1", "user1", "user1", false, 2000])
+    // await connection.executeQuery(`insert into user (userName,passWord,nickName,isAdmin,balance) values (?,?,?,?,?)`, ["user1", "user1", "user1", false, 2000])
 
     // await connection.executeQuery('delete from user where userId = 7')
     //     .then((data) => {

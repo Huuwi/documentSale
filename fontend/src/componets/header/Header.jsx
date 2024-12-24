@@ -40,7 +40,7 @@ function Header() {
 
     function clickSecondCate() {
         localStorage.setItem("categorySelected", 1)
-        navigate("/dashBoard")
+        navigate("/getBoughtDocument")
     }
 
 

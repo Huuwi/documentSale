@@ -66,6 +66,9 @@
 .itemPic {
     width: 20%;
     height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .itemName {
@@ -85,6 +88,19 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.purchase {
+    width: 280px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 10px;
+    right: -300px;
+    background-color: white;
+    justify-content: space-around;
+    align-items: center;
 }
 
 
@@ -112,9 +128,7 @@
   touch-action: manipulation;
   vertical-align: middle;
   width: 200px;
-  position: absolute;
-  bottom: 10px;
-  right: -300px;
+
 }
 
 .button24:hover,

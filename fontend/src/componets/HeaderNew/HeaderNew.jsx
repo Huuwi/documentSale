@@ -83,7 +83,7 @@ function HeaderNew() {
         setIsShow(false)
     }
     function viewCart() {
-        window.open("/cart");
+        navigate("/cart")
     }
 
     return (

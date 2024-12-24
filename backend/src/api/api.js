@@ -65,7 +65,7 @@ api.post("/auth/getBoughtDocument", authController.getBoughtDocument)
 api.post("/auth/getCart", authController.getCart)
 api.post("/auth/addCart", authController.addCart)
 api.post("/auth/removeItemCart", authController.removeItemCart)
-
+api.post("/auth/purchase", authController.addCart)
 
 api.post("/auth/buyDocument", authController.buyDocument) // chua cap nhap quantitySold
 

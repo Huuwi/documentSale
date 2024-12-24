@@ -7,8 +7,8 @@ import Book from "../../pages/admin/adminDashBoard/DisplayBook/Book/Book";
 function AdminHeader() {
     let navigate = useNavigate()
 
-
-    let categoryAdminSelected = localStorage.getItem("categoryAdminSelected") || 0
+    let categoryAdminSelected = 0
+    categoryAdminSelected = localStorage.getItem("categoryAdminSelected") || 0
 
 
 

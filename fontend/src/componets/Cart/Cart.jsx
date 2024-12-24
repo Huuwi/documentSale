@@ -10,20 +10,25 @@ function Cart() {
     const [itemList, setItemList] = useState([])
     const [total, setTotal] = useState(0)
 
-    useEffect(async () => {
-        try {
-            const response = await axios.post(
-                import.meta.env.VITE_BACKEND_URL + "/auth/getCart",
-                {},
-                { withCredentials: true }
-            );
-            console.log(response.data.dataCart)
-            setItemList(response.data.dataCart)
+    useEffect(() => {
+        async function fetchData() {
+
+            try {
+                const response = await axios.post(
+                    import.meta.env.VITE_BACKEND_URL + "/auth/getCart",
+                    {},
+                    { withCredentials: true }
+                );
+                console.log(response.data.dataCart)
+                setItemList(response.data.dataCart)
+            }
+            catch (error) {
+                console.log(error);
+                alert(error.response.data.message);
+            }
         }
-        catch (error) {
-            console.log(error);
-            alert(error.response.data.message);
-        }
+
+        fetchData()
     }, [])
 
     useEffect(() => {
@@ -41,7 +46,7 @@ function Cart() {
                 { documentId },
                 { withCredentials: true }
             );
-            window.alert("Thành công!")
+            alert("Thành công!")
             window.location.reload()
         }
         catch (error) {

@@ -95,6 +95,61 @@ class AuthController {
     }
 
 
+    async addCart(req, res) {
+
+        try {
+            let userId = req?.decodeAccessToken?.userId;
+
+            if (!userId) {
+                return res.status(400).json({
+                    message: "not found userId!"
+                });
+            }
+
+            let { documentId } = req.body;
+
+            if (!documentId) {
+                return res.status(400).json({
+                    message: "missing data!"
+                });
+            }
+
+            let documentFound = await globalThis.connection.executeQuery("select * from document where documentId = ?", [documentId])
+                .then((r) => {
+                    return r[0];
+                })
+                .catch((e) => {
+                    throw new Error(e);
+                });
+
+            if (!documentFound) {
+                return res.status(400).json({
+                    message: "not found document!"
+                });
+            }
+
+            await globalThis.connection.executeQuery("insert into cart (userId, documentId) values (?,?)", [userId, documentId])
+                .then((r) => {
+                    return r;
+                })
+                .catch((e) => {
+                    throw new Error(e);
+                });
+
+            return res.status(200).json({
+                message: "ok"
+            });
+
+        } catch (error) {
+            console.log("error when addCart : ", error);
+            return res.status(500).json({
+                message: "have wrong!"
+            });
+        }
+
+    }
+
+
     async register(req, res) {
         try {
 

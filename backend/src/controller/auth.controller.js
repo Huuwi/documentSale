@@ -149,6 +149,46 @@ class AuthController {
 
     }
 
+    async removeItemCart(req, res) {
+
+        try {
+            let userId = req?.decodeAccessToken?.userId;
+
+            if (!userId) {
+                return res.status(400).json({
+                    message: "not found userId!"
+                });
+            }
+
+            let { documentId } = req.body;
+
+            if (!documentId) {
+                return res.status(400).json({
+                    message: "missing data!"
+                });
+            }
+
+            await globalThis.connection.executeQuery("delete from cart where userId = ? and documentId = ?", [userId, documentId])
+                .then((r) => {
+                    return r;
+                })
+                .catch((e) => {
+                    throw new Error(e);
+                });
+
+            return res.status(200).json({
+                message: "ok"
+            });
+
+        } catch (error) {
+            console.log("error when removeItemCart : ", error);
+            return res.status(500).json({
+                message: "have wrong!"
+            });
+        }
+
+    }
+
 
     async register(req, res) {
         try {

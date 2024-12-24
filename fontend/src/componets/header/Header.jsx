@@ -7,6 +7,7 @@ function Header() {
     let navigate = useNavigate()
     let userData = localStorage.getItem("userData")
     let [nickName, setNickName] = useState("")
+    let [balance, setBalance] = useState(0)
 
     useEffect(() => {
         if (!userData) {
@@ -14,9 +15,10 @@ function Header() {
         }
         else {
             userData = JSON.parse(userData)
+            setBalance(userData.balance)
             setNickName(userData.nickName)
         }
-    }, [nickName])
+    }, [nickName, balance])
 
     let categorySelected = localStorage.getItem("categorySelected") || 0
 
@@ -72,7 +74,7 @@ function Header() {
                 <div className={styles.childElement} style={categorySelected == 3 ? styleSelected : {}} onMouseEnter={handleHover} onMouseLeave={() => { setHoverAccountInfor(false) }} onClick={clickFourCate} >
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", margin: "10px" }} >
                         <FaUserCircle className={styles.iconUser} />
-                        <span style={{ padding: "5px", minWidth: "200px" }}>Xin chào : {nickName}</span>
+                        <span style={{ padding: "5px", minWidth: "200px" }}>Xin chào : {nickName} | Số dư : {balance}</span>
                     </div>
                 </div>
                 {

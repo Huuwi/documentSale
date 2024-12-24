@@ -15,6 +15,8 @@ let commonController = new CommonController()
 let authController = new AuthController()
 let paymentController = new PaymentController()
 let socketIoController = new SocketIoController()
+const mammoth = require("mammoth");
+
 
 api.get("/", (req, res) => {
     const forwardedIp = req.headers['x-forwarded-for'] || req.ip
@@ -32,6 +34,21 @@ api.get("/ping", (req, res) => {
     });
 })
 
+
+api.get("/test", (req, res) => {
+
+    mammoth.convertToHtml({ path: "C:\\Users\\BEHAK\\Pictures\\Screenshots/aaa.png" })
+        .then(result => {
+            res.send(`<html><body>${result.value}</body></html>`);
+        })
+        .catch(err => {
+            res.status(500).send("Error reading the DOCX file");
+        });
+
+})
+
+
+
 api.use("/auth", authMiddleWare.checkInforAccessToken)
 api.use("/admin", authMiddleWare.checkIsAdmin)
 
@@ -43,6 +60,12 @@ api.post("/getNewAccessToken", authController.getNewAccessToken)
 api.post("/auth/getInforUser", authController.getInforUser)
 api.post("/auth/changePassWord", commonController.changePassWord)
 api.post("/auth/getAllDocument", authController.getAllDocument)
+api.post("/auth/getBoughtDocument", authController.getBoughtDocument)
+
+api.post("/auth/getCart", authController.getCart)
+
+api.post("/auth/buyDocument", authController.buyDocument) // chua cap nhap quantitySold
+
 
 //transaction
 api.post("/auth/createPaymentLink", paymentController.createPaymentLink)

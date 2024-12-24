@@ -41,9 +41,14 @@ const main = async () => {
     // await connection.executeQuery(`CREATE TABLE boughtDocument (
     //         boughtDocumentId int primary key NOT NULL AUTO_INCREMENT,
     //         userId int,
-    //         documentId int,
-    //         price double
+    //         documentId int
     //         );`)
+
+    // await connection.executeQuery(`CREATE TABLE cart (
+    //             cartId int primary key NOT NULL AUTO_INCREMENT,
+    //             userId int,
+    //             documentId int
+    //             );`)
 
 
 
@@ -73,7 +78,7 @@ const main = async () => {
             console.log(data);
         })
 
-    // await connection.executeQuery("drop table document")
+    // await connection.executeQuery("drop table boughtDocument")
     // await FileDisk.asyncFileWithDB()
 
 

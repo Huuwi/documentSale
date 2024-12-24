@@ -51,9 +51,6 @@ class AuthController {
                 })
             }
 
-            console.log("passWord : ", passWord);
-            console.log("hash : ", userFound?.passWord);
-
 
 
             if (!commonHelper.compareHash(passWord, userFound?.passWord)) {
@@ -295,6 +292,154 @@ class AuthController {
                 message: "have wrong!"
             })
         }
+    }
+
+    async getBoughtDocument(req, res) {
+        try {
+
+            let userId = req?.decodeAccessToken?.userId
+
+            if (!userId) {
+                return res.status(400).json({
+                    message: "not found userId!"
+                })
+            }
+
+            let dataBoughtDocument = await globalThis.connection.executeQuery(`
+                    select document.documentId , document.name , document.author , document.description , document.image,document.type from boughtDocument join document on boughtDocument.documentId = document.documentId where boughtDocument.userId = ${userId}
+                `)
+                .then((r) => {
+                    return r
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+            return res.status(200).json({
+                message: "ok",
+                dataBoughtDocument
+            })
+
+        } catch (error) {
+            console.log("error when getBoughtDocument : ", error);
+            return res.status(500).json({
+                message: "have wrong!"
+            })
+        }
+
+    }
+
+
+    async buyDocument(req, res) {
+        try {
+
+            let userId = req?.decodeAccessToken?.userId
+
+            if (!userId) {
+                return res.status(400).json({
+                    message: "not found userId!"
+                })
+            }
+
+            let { documentId } = req.body
+
+            if (!documentId) {
+                return res.status(400).json({
+                    message: "missing data!"
+                })
+            }
+
+            let documentFound = await globalThis.connection.executeQuery("select * from document where documentId = ?", [documentId])
+                .then((r) => {
+                    return r[0]
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+            if (!documentFound) {
+                return res.status(400).json({
+                    message: "not found document!"
+                })
+            }
+
+            let balanceUser = await globalThis.connection.executeQuery("select balance from user where userId = ?", [userId])
+                .then((r) => {
+                    return r[0].balance
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+            if (balanceUser < documentFound.price) {
+                return res.status(400).json({
+                    message: "balance not enough!"
+                })
+            }
+
+            await globalThis.connection.executeQuery("insert into boughtDocument (userId, documentId) values (?,?)", [userId, documentId])
+                .then((r) => {
+                    return r
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+            await globalThis.connection.executeQuery("update user set balance = balance - ? where userId = ?", [documentFound.price, userId])
+
+            await globalThis.connection.executeQuery("update document set quantitySold = quantitySold + 1 where documentId = ?", [documentId])
+
+
+            return res.status(200).json({
+                message: "ok"
+            })
+
+
+
+        } catch (error) {
+            console.log("error when buyDocument : ", error);
+            return res.status(500).json({
+                message: "have wrong!"
+            })
+        }
+
+    }
+
+
+    async getCart(req, res) {
+
+        try {
+
+            let userId = req?.decodeAccessToken?.userId
+
+            if (!userId) {
+                return res.status(400).json({
+                    message: "not found userId!"
+                })
+            }
+
+            let dataCart = await globalThis.connection.executeQuery(`
+                    select document.documentId , document.name , document.author , document.description , document.image,document.type,document.price , document.quantitySold from cart join document on cart.documentId = document.documentId where cart.userId = ${userId}
+                `)
+                .then((r) => {
+                    return r
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+            return res.status(200).json({
+                message: "ok",
+                dataCart
+            })
+
+        } catch (error) {
+            console.log("error when getCart : ", error);
+            return res.status(500).json({
+                message: "have wrong!"
+            })
+        }
+
     }
 
 

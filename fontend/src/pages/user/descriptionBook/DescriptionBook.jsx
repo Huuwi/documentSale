@@ -7,7 +7,7 @@ import { RiRefund2Fill } from "react-icons/ri";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { useEffect, useRef } from "react";
 import { FaRegStar } from "react-icons/fa";
-
+import axios from "axios";
 
 function DescriptionBook() {
 
@@ -32,6 +32,28 @@ function DescriptionBook() {
         return result;
     }
 
+    async function handleClickBuyItem() {
+
+        if (!window.confirm("Bạn có chắc chắn mua hàng không ?")) {
+            return;
+        }
+
+        try {
+            const response = await axios.post(
+                import.meta.env.VITE_BACKEND_URL + "/auth/getBoughtDocument",
+                { documentId: descriptionBook.documentId },
+                { withCredentials: true }
+            );
+            alert("Mua hàng thành công");
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+            alert(error.response.data.message);
+        }
+
+
+    }
+
 
 
     return (
@@ -43,7 +65,7 @@ function DescriptionBook() {
                     <div className={styles.image} style={{ backgroundImage: `url(${descriptionBook.image})` }} />
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px" }}>
                         <button className={styles.btnAddCart}><FaCartPlus style={{ fontSize: "25px", margin: "5px" }} /> Thêm vào giỏ hàng</button>
-                        <button className={styles.btnBuy}>Mua trực tiếp hàng</button>
+                        <button className={styles.btnBuy} onClick={handleClickBuyItem} >Mua trực tiếp hàng</button>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", marginTop: "20px", flexDirection: "column", gap: "10px" }}>
                         <h3 style={{ color: "green" }} >Chính sách ưu đãi của TaoWork</h3>
@@ -174,12 +196,6 @@ function DescriptionBook() {
                             </strong>
                         </p>
                     </div>
-
-
-
-
-
-
 
                 </div>
 

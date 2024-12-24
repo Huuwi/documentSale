@@ -71,9 +71,16 @@ input::placeholder {
 .cartIcon {
     font-size: 60px;
     cursor: pointer;
+    width: 100px;
+    height: 50px;
     transition: .5s;
     margin-left: 40px;
     margin-right: 10px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cartIcon:hover {
@@ -114,4 +121,47 @@ input::placeholder {
 
 .searchResultItem:hover {
     background-color: #57a845;
+}
+
+.itemListContainer {
+    width: 400px;
+    height: 500px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.items {
+    width: 100%;
+    height: 90%;
+    overflow-y: scroll;
+    border-bottom: 1px solid black;
+}
+
+.items>table {
+    width: 100%;
+    font-size: 15px;
+    border-collapse: collapse;
+}
+
+.items>table>tr:hover {
+    background-color: gray;
+}
+
+.items>table>tr>td,
+.items>table>tr>th {
+    padding: 10px 20px;
+}
+
+.cartViewBtn {
+    width: 100px;
+    height: 5%;
+    position: absolute;
+    left: 150px;
+    bottom: 10px;
+    cursor: pointer;
 }

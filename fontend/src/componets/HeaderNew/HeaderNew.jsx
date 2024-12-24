@@ -5,8 +5,11 @@ import { FaPhone } from "react-icons/fa";
 import { FaCartArrowDown } from "react-icons/fa";
 import { use, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function HeaderNew() {
+    const [isShow, setIsShow] = useState(false)
+    const [itemList, setItemList] = useState([])
     let navigate = useNavigate()
 
     let userData = localStorage.getItem("userData")
@@ -59,6 +62,30 @@ function HeaderNew() {
         })}
     </div >
 
+    async function showItemList() {
+        setIsShow(true)
+        try {
+            const response = await axios.post(
+                import.meta.env.VITE_BACKEND_URL + "/auth/getCart",
+                {},
+                { withCredentials: true }
+            );
+            console.log(response.data.dataCart)
+            setItemList(response.data.dataCart)
+        }
+        catch (error) {
+            console.log(error);
+            alert(error.response.data.message);
+        }
+    }
+
+    function hideItemList() {
+        setIsShow(false)
+    }
+    function viewCart() {
+        window.open("/cart");
+    }
+
     return (
         <div className={styles.wrapper}>
             <Header />
@@ -72,10 +99,38 @@ function HeaderNew() {
                     <span style={{ color: "red", fontSize: "20px" }}>Hotline</span>
                     <span>199828129</span>
                 </div>
-                <FaCartArrowDown className={styles.cartIcon} />
+                <div className={styles.cartIcon} onMouseEnter={showItemList} onMouseLeave={hideItemList}>
+                    <FaCartArrowDown style={{ fontSize: '30px' }} />
+                    <div className={styles.itemListContainer}
+                        style={{
+                            display: isShow ? "block" : "none"
+                        }}
+                    >
+                        <div className={styles.items}>
+                            <table border={0}>
+                                <tr>
+                                    <th>Tên sách</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá</th>
+                                </tr>
+                                {itemList.map((item, i) => {
+                                    return (
+                                        <tr key={i}>
+                                            <td>{item.name}</td>
+                                            <td>1</td>
+                                            <td>{item.price}.000VNĐ</td>
+                                        </tr>
+                                    )
+                                })}
+                            </table>
+                        </div>
+                        <button className={styles.cartViewBtn} onClick={viewCart}>Xem giỏ hàng</button>
+                    </div>
+                </div>
                 <span>Giỏ Hàng</span>
             </div>
             <div style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
+
         </div>
 
     )

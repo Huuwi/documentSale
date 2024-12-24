@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import styles from "./Library.module.css"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { IoCloudDownloadSharp } from "react-icons/io5";
 
 function Library() {
     const [itemList, setItemList] = useState([])
+    let navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,6 +26,10 @@ function Library() {
 
         fetchData();
     }, []);
+
+    function back() {
+        navigate('/dashBoard')
+    }
 
 
     return (
@@ -45,12 +51,12 @@ function Library() {
                                 <div className={styles.itemName}><p>{item.name}</p></div>
                                 <div className={styles.itemCount}><p>1</p></div>
                                 <div className={styles.itemMoney}><p>{item.price}.000VNĐ</p></div>
-                                <BsTrash3 style={{ height: '100%', cursor: 'pointer', marginLeft: '20px', marginTop: '5px' }} />
+                                <IoCloudDownloadSharp style={{ height: '100%', cursor: 'pointer', marginLeft: '20px', marginTop: '5px' }} />
                             </div>
                         )
                     })}
                     <div className={styles.purchase}>
-                        <button className={styles.button24} role="button">Trở về</button>
+                        <button className={styles.button24} role="button" onClick={back}>Trở về</button>
                     </div>
                 </div>
             </div>

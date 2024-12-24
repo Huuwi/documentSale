@@ -75,7 +75,7 @@ function Cart() {
                         )
                     })}
                     <div className={styles.purchase}>
-                        <p style={{ fontSize: '20px' }}>Thành tiền: {total}.000VNĐ</p>
+                        <p style={{ fontSize: '20px' }}>Tổng tiền: {total}.000VNĐ</p>
                         <button class={styles.button24} role="button">Mua Hàng</button>
                     </div>
                 </div>

@@ -63,7 +63,7 @@ function Library() {
             } else if (contentType === 'image/png') {
                 fileExtension = '.png';
             } else {
-                fileExtension = '.bin';  // Nếu không nhận diện được định dạng, đặt là .bin
+                fileExtension = '.pdf';  // Nếu không nhận diện được định dạng, đặt là .bin
             }
 
 

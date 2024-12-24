@@ -54,6 +54,11 @@ function Header() {
         navigate("/dashBoard")
     }
 
+    function clickFiveCate() {
+        localStorage.setItem("categorySelected", 3)
+        navigate("/login")
+    }
+
 
     return (
         <div className={styles.headerWrapper}>
@@ -80,7 +85,7 @@ function Header() {
                 {
                     !hoverAccountInfor ? <div />
                         : <div style={{ display: "flex", flexDirection: "column" }}>
-                            <span className={styles.spanPayMent} onMouseEnter={handleHover} onMouseLeave={() => { setHoverAccountInfor(false) }} onClick={clickFourCate}>Đăng xuất</span>
+                            <span className={styles.spanPayMent} onMouseEnter={handleHover} onMouseLeave={() => { setHoverAccountInfor(false) }} onClick={clickFiveCate}>Đăng xuất</span>
                             <span className={styles.spanPayMent} onMouseEnter={handleHover} onMouseLeave={() => { setHoverAccountInfor(false) }} onClick={clickFourCate}>Tài khoản của tôi</span>
                         </div>
                 }

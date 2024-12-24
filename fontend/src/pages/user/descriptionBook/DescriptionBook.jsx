@@ -41,12 +41,12 @@ function DescriptionBook() {
 
         try {
             const response = await axios.post(
-                import.meta.env.VITE_BACKEND_URL + "/auth/getBoughtDocument",
+                import.meta.env.VITE_BACKEND_URL + "/auth/buyDocument",
                 { documentId: descriptionBook.documentId },
                 { withCredentials: true }
             );
             alert("Mua hàng thành công");
-            window.location.reload();
+            window.location.href = "/desBook";
         } catch (error) {
             console.log(error);
             alert(error.response.data.message);
@@ -62,7 +62,7 @@ function DescriptionBook() {
                 { documentId: descriptionBook.documentId },
                 { withCredentials: true }
             );
-            setShowDiv(true); 
+            setShowDiv(true);
             setTimeout(() => {
                 setShowDiv(false);
             }, 1000);

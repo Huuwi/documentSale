@@ -1,6 +1,6 @@
 const CommonHelper = require("../helper/common.helper.js")
 let commonHelper = new CommonHelper()
-
+const path = require("path")
 const AuthHelper = require("../helper/auth.helper.js")
 let authHelper = new AuthHelper()
 
@@ -401,7 +401,7 @@ class AuthController {
             }
 
             let dataBoughtDocument = await globalThis.connection.executeQuery(`
-                    select document.documentId , document.name , document.author , document.description , document.image,document.type from boughtDocument join document on boughtDocument.documentId = document.documentId where boughtDocument.userId = ${userId}
+                    select document.documentId , document.name , document.author , document.description,document.price , document.image,document.type from boughtDocument join document on boughtDocument.documentId = document.documentId where boughtDocument.userId = ${userId}
                 `)
                 .then((r) => {
                     return r
@@ -409,6 +409,8 @@ class AuthController {
                 .catch((e) => {
                     throw new Error(e)
                 })
+
+
 
             return res.status(200).json({
                 message: "ok",
@@ -480,9 +482,20 @@ class AuthController {
                     throw new Error(e)
                 })
 
-            await globalThis.connection.executeQuery("update user set balance = balance - ? where userId = ?", [documentFound.price, userId])
+
+            await globalThis.connection.executeQuery(`
+                UPDATE user
+                SET balance = balance - ?
+                WHERE userId = ?;
+                `, [documentFound.price, userId])
 
             await globalThis.connection.executeQuery("update document set quantitySold = quantitySold + 1 where documentId = ?", [documentId])
+                .then((r) => {
+                    return r
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
 
 
             return res.status(200).json({
@@ -530,6 +543,68 @@ class AuthController {
 
         } catch (error) {
             console.log("error when getCart : ", error);
+            return res.status(500).json({
+                message: "have wrong!"
+            })
+        }
+
+    }
+
+
+    async downloadDocument(req, res) {
+
+        try {
+
+            let { documentId } = req.body
+
+            if (!documentId) {
+                return res.status(400).json({
+                    message: "missing data!"
+                })
+            }
+
+            let documentFound = await globalThis.connection.executeQuery("select * from document where documentId = ?", [documentId])
+                .then((r) => {
+                    return r[0]
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+            if (!documentFound) {
+                return res.status(400).json({
+                    message: "not found document!"
+                })
+            }
+
+            let documentBoughtFound = await globalThis.connection.executeQuery("select * from boughtDocument where documentId = ? and userId = ?", [documentId, req?.decodeAccessToken?.userId])
+                .then((r) => {
+                    return r[0]
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+            if (!documentBoughtFound) {
+                return res.status(400).json({
+                    message: "you have not bought this document!"
+                })
+            }
+
+
+
+            let filePath = path.resolve(documentFound.filePath)
+
+
+            return res.download(filePath, (err) => {
+                if (err) {
+                    console.error('Error sending file:', err);
+                    res.status(500).send('Error sending file');
+                }
+            });
+
+        } catch (error) {
+            console.log("error when downloadDocument : ", error);
             return res.status(500).json({
                 message: "have wrong!"
             })

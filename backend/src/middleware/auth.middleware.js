@@ -67,12 +67,12 @@ class AuthMiddleWare {
             req.decodeAccessToken = validAccessToken.decodeAccessToken.data
 
 
-            // if (at != globalThis.tokenOfUserId.get(req.decodeAccessToken?.userId)?.at) {
-            //     res.cookie("at", "")
-            //     return res.status(400).json({
-            //         message: "old access token!"
-            //     })
-            // }
+            if (at != globalThis.tokenOfUserId.get(req.decodeAccessToken?.userId)?.at) {
+                res.cookie("at", "")
+                return res.status(400).json({
+                    message: "old access token!"
+                })
+            }
 
             if (!validAccessToken.decodeAccessToken.data.isAdmin) {
                 res.cookie("at", "")

@@ -15,10 +15,16 @@ import Library from './componets/Library/Library.jsx'
 
 function App() {
 
+
+
+
   let location = useLocation()
   let navigate = useNavigate()
 
   useEffect(() => {
+
+    localStorage.removeItem("categorySelected");
+    localStorage.removeItem("categoryAdminSelected");
 
     const fetchData = async () => {
 

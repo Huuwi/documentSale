@@ -66,6 +66,18 @@ const main = async () => {
 
     // await connection.executeQuery(`insert into user (userName,passWord,nickName,isAdmin,balance) values (?,?,?,?,?)`, ["user1", "user1", "user1", false, 2000])
 
+    // await connection.executeQuery(`insert into user (userName,passWord,nickName,isAdmin,balance) values (?,?,?,?,?)`, ["user2", "user2", "user2", false, 2000])
+
+
+    await connection.executeQuery(`UPDATE user
+    SET balance = balance + 4000
+    WHERE username = 'user4';`)
+        .catch((e) => {
+            console.log(e);
+
+        })
+
+
     // await connection.executeQuery('delete from user where userId = 7')
     //     .then((data) => {
     //         console.log(data);
@@ -73,7 +85,7 @@ const main = async () => {
 
 
 
-    await connection.executeQuery('select * from document')
+    await connection.executeQuery('select * from user')
         .then((data) => {
             console.log(data);
         })

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import styles from "./AdminHeader.module.css"
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Book from "../../pages/admin/adminDashBoard/DisplayBook/Book/Book";
 
 function AdminHeader() {
     let navigate = useNavigate()
@@ -22,7 +23,7 @@ function AdminHeader() {
 
     function clickSecondCate() {
         localStorage.setItem("categoryAdminSelected", 1)
-        navigate("/admin/DashBoard")
+        navigate("/admin/upload")
     }
 
 

@@ -9,6 +9,7 @@ import PaymentSuccess from './pages/payMent/paymentSuccess/PaymentSuccess.jsx'
 import AdminDashBoard from './pages/admin/adminDashBoard/AdminDashBoard.jsx'
 import UserDashBoard from './pages/user/userDashBoard/userDashBoard.jsx'
 import DescriptionBook from './pages/user/descriptionBook/DescriptionBook.jsx'
+import UploadDocument from './pages/admin/upload/Upload.jsx'
 
 function App() {
 
@@ -65,6 +66,7 @@ function App() {
         <Route path='/paymentSuccess' element={<PaymentSuccess />} />
         <Route path='/admin/DashBoard' element={<AdminDashBoard />} />
         <Route path='/desBook' element={<DescriptionBook />} />
+        <Route path='admin/upload' element={<UploadDocument />} />
       </Routes>
     </>
   )

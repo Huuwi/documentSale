@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from "./DisplayBook.module.css"
-
+import Book from './Book/Book';
 const DisplayBook = () => {
     const [books, setBooks] = useState([]);
 
@@ -21,6 +21,13 @@ const DisplayBook = () => {
 
     return (
         <div>
+            {
+                !books?.length ? <h1>Không có sách nào</h1>
+                    : books.map((book, index) => {
+                        return <Book key={index} dataBook={book} />
+                    })
+
+            }
 
         </div>
     );

@@ -55,6 +55,25 @@ function Cart() {
         }
     }
 
+
+    async function handleBuyCart() {
+
+        try {
+            const response = await axios.post(
+                import.meta.env.VITE_BACKEND_URL + "/auth/buyCart",
+                {},
+                { withCredentials: true }
+            );
+            alert("Thành công!")
+            window.location.reload()
+        }
+        catch (error) {
+            console.log(error);
+            alert(error.response.data.message);
+        }
+
+    }
+
     return (
         <div className={styles.cartContainer}>
             <HeaderNew />
@@ -81,7 +100,7 @@ function Cart() {
                     })}
                     <div className={styles.purchase}>
                         <p style={{ fontSize: '20px' }}>Tổng tiền: {total}.000VNĐ</p>
-                        <button class={styles.button24} role="button">Mua Hàng</button>
+                        <button class={styles.button24} onClick={handleBuyCart} role="button">Mua Hàng</button>
                     </div>
                 </div>
             </div>

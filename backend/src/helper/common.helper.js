@@ -47,7 +47,8 @@ class CommonHelper {
                 })
             // console.log(text);
 
-            const hash = crypto.createHash("md5")
+            const hash = crypto.createHash("sha256")
+
             let key = hash.update(text + process.env.CAPTCHA_SECRECT_KEY + Date.now() + Math.random()).digest('hex')
 
             globalThis.tokenCaptcha.set(key, {

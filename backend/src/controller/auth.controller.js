@@ -613,6 +613,98 @@ class AuthController {
     }
 
 
+    async buyCart(req, res) {
+
+        try {
+
+            let userId = req?.decodeAccessToken?.userId
+
+            if (!userId) {
+                return res.status(400).json({
+                    message: "not found userId!"
+                })
+            }
+
+            let dataCart = await globalThis.connection.executeQuery(`
+                    select document.documentId , document.name , document.author , document.description , document.image,document.type,document.price , document.quantitySold from cart join document on cart.documentId = document.documentId where cart.userId = ${userId}
+                `)
+                .then((r) => {
+                    return r
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+            if (!dataCart?.length) {
+                return res.status(400).json({
+                    message: "cart is empty!"
+                })
+            }
+
+            let balanceUser = await globalThis.connection.executeQuery("select balance from user where userId = ?", [userId])
+                .then((r) => {
+                    return r[0].balance
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+            let total = dataCart.reduce((acc, e) => {
+                return acc + e.price
+            }, 0)
+
+            if (balanceUser < total) {
+                return res.status(400).json({
+                    message: "balance not enough!"
+                })
+            }
+
+            for (let e of dataCart) {
+                await globalThis.connection.executeQuery("insert into boughtDocument (userId, documentId) values (?,?)", [userId, e.documentId])
+                    .then((r) => {
+                        return r
+                    })
+                    .catch((e) => {
+                        throw new Error(e)
+                    })
+
+                await globalThis.connection.executeQuery(`
+                UPDATE user
+                SET balance = balance - ?
+                WHERE userId = ?;
+                `, [e.price, userId])
+
+                await globalThis.connection.executeQuery("update document set quantitySold = quantitySold + 1 where documentId = ?", [e.documentId])
+                    .then((r) => {
+                        return r
+                    })
+                    .catch((e) => {
+                        throw new Error(e)
+                    })
+
+            }
+
+            await globalThis.connection.executeQuery("delete from cart where userId = ?", [userId])
+                .then((r) => {
+                    return r
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+            return res.status(200).json({
+                message: "ok"
+            })
+
+        } catch (error) {
+            console.log("error when buyCart : ", error);
+            return res.status(500).json({
+                message: "have wrong!"
+            })
+        }
+    }
+
+
 }
 
 
